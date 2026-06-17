@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: #E5602B; color: #F4EAD6; }
+  @keyframes spin70 { to { transform: rotate(360deg); } }
+  @keyframes marquee70 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes floaty70 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes bob70 { 0%,100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(7px); opacity: 1; } }
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="--cream:#EFE3CD; --cream2:#E7D6B8; --paper:#F4EAD6; --brown:#211405; --brown2:#39260F; --ink:#2A1B0C; --muted:#806F54; --orange:#E5602B; --orange-d:#C44C1E; --mustard:#D6982A; --avocado:#5E6730; --rust:#A8492A; --disp:'Alfa Slab One',Georgia,serif; --sans:'Archivo',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace; background:var(--cream); color:var(--ink); font-family:var(--sans); position:relative; overflow-x:hidden;">
+
+  <x-import component-from-global-scope="image-slot" from="./image-slot.js" hint-size="1px,1px" style="display:none; position:absolute;"></x-import>
+
+  <div data-grain style="position:fixed; inset:0; z-index:9000; pointer-events:none; mix-blend-mode:overlay; opacity:.42; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+
+  <!-- ANNOUNCEMENT MARQUEE -->
+  <div style="background:var(--brown); color:var(--paper); overflow:hidden; white-space:nowrap; border-bottom:1px solid rgba(244,234,214,.14);">
+    <div style="display:inline-flex; gap:0; will-change:transform; animation:marquee70 26s linear infinite;">
+      <div style="display:inline-flex; align-items:center; font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; padding:10px 0;">
+        <span style="padding:0 26px;">Livraison offerte dès 100&nbsp;$</span><span style="color:var(--orange);">✦</span>
+        <span style="padding:0 26px;">Nouveaux arrivages chaque semaine</span><span style="color:var(--orange);">✦</span>
+        <span style="padding:0 26px;">Pièces authentiques des seventies</span><span style="color:var(--orange);">✦</span>
+        <span style="padding:0 26px;">Retours sous 30 jours</span><span style="color:var(--orange);">✦</span>
+      </div>
+      <div style="display:inline-flex; align-items:center; font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; padding:10px 0;">
+        <span style="padding:0 26px;">Livraison offerte dès 100&nbsp;$</span><span style="color:var(--orange);">✦</span>
+        <span style="padding:0 26px;">Nouveaux arrivages chaque semaine</span><span style="color:var(--orange);">✦</span>
+        <span style="padding:0 26px;">Pièces authentiques des seventies</span><span style="color:var(--orange);">✦</span>
+        <span style="padding:0 26px;">Retours sous 30 jours</span><span style="color:var(--orange);">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header style="position:sticky; top:0; z-index:8000; background:rgba(239,227,205,.86); backdrop-filter:blur(10px); border-bottom:1px solid rgba(42,27,12,.12);">
+    <div style="max-width:1320px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+      <nav style="display:flex; align-items:center; gap:26px; flex:1; min-width:220px;">
+        <a href="#shop" style="font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:color .2s;" style-hover="color:var(--orange)">Boutique</a>
+        <a href="#collections" style="font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:color .2s;" style-hover="color:var(--orange)">Collections</a>
+        <a href="#histoire" style="font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:color .2s;" style-hover="color:var(--orange)">Histoire</a>
+        <a href="#journal" style="font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:color .2s;" style-hover="color:var(--orange)">Journal</a>
+      </nav>
+      <a href="#top" style="text-decoration:none; text-align:center; flex:0 0 auto;">
+        <div style="font-family:var(--disp); font-size:25px; line-height:.9; color:var(--ink); letter-spacing:.01em;">THE 70<span style="color:var(--orange);">s</span> STUDIO</div>
+      </a>
+      <div style="display:flex; align-items:center; justify-content:flex-end; gap:20px; flex:1; min-width:220px;">
+        <a href="#shop" style="font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:color .2s;" style-hover="color:var(--orange)">Recherche</a>
+        <a href="#compte" style="font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:color .2s;" style-hover="color:var(--orange)">Compte</a>
+        <a href="#panier" style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--paper); background:var(--brown); padding:9px 15px; border-radius:999px; text-decoration:none; transition:background .2s, transform .2s;" style-hover="background:var(--orange); transform:translateY(-1px)">Panier <span style="background:var(--orange); color:var(--paper); border-radius:999px; min-width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; font-size:11px;">2</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" style="position:relative; height:clamp(580px,90vh,900px); overflow:hidden; background:var(--brown);">
+    <image-slot id="hero-bg" shape="rect" fit="cover" placeholder="Photo lifestyle — intérieur seventies, vinyles, lumière chaude (paysage)" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,12,4,.34) 0%, rgba(20,12,4,.18) 38%, rgba(20,12,4,.74) 100%);"></div>
+    <div style="position:absolute; inset:0; background:radial-gradient(120% 80% at 18% 30%, rgba(229,96,43,.16), transparent 60%);"></div>
+
+    <div data-vinyl style="position:absolute; top:8%; right:5%; width:clamp(120px,15vw,210px); height:clamp(120px,15vw,210px); border-radius:50%; animation:spin70 9s linear infinite; background:repeating-radial-gradient(circle at 50% 50%, #15100a 0 1.5px, #0a0805 1.5px 3.5px); box-shadow:0 18px 50px rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; opacity:.92;">
+      <div style="width:34%; height:34%; border-radius:50%; background:radial-gradient(circle, var(--orange) 0 60%, #b34419 61% 100%); display:flex; align-items:center; justify-content:center;">
+        <div style="width:14%; height:14%; border-radius:50%; background:var(--brown);"></div>
+      </div>
+    </div>
+
+    <div style="position:relative; z-index:2; max-width:1320px; margin:0 auto; height:100%; padding:0 28px; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:clamp(48px,8vh,96px);">
+      <div style="font-family:var(--mono); font-size:13px; letter-spacing:.26em; text-transform:uppercase; color:var(--mustard); margin-bottom:20px;">✦&nbsp;&nbsp;Nouvelle collection · Automne 1973</div>
+      <h1 style="font-family:var(--disp); font-weight:400; color:var(--paper); font-size:clamp(48px,9vw,128px); line-height:.92; letter-spacing:-.01em; margin:0; max-width:14ch; text-shadow:0 4px 30px rgba(0,0,0,.35);">Le grain des années groovy.</h1>
+      <p style="color:rgba(244,234,214,.86); font-size:clamp(16px,1.5vw,20px); line-height:1.5; max-width:48ch; margin:24px 0 34px;">Posters, vinyles, lampes et trouvailles analogiques. Une sélection pointue pour recréer l'ambiance des seventies — chez vous, à travers un regard moderne.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="#shop" style="display:inline-flex; align-items:center; gap:10px; background:var(--orange); color:var(--paper); font-family:var(--mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; padding:16px 28px; border-radius:999px; text-decoration:none; transition:background .22s, transform .22s, box-shadow .22s; box-shadow:0 10px 26px rgba(229,96,43,.36);" style-hover="background:var(--orange-d); transform:translateY(-2px); box-shadow:0 14px 32px rgba(229,96,43,.5)">Magasiner la collection →</a>
+        <a href="#histoire" style="display:inline-flex; align-items:center; gap:10px; background:transparent; color:var(--paper); font-family:var(--mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; padding:16px 28px; border-radius:999px; text-decoration:none; border:1.5px solid rgba(244,234,214,.55); transition:background .22s, border-color .22s;" style-hover="background:rgba(244,234,214,.12); border-color:var(--paper)">Notre histoire</a>
+      </div>
+    </div>
+
+    <div style="position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:2; font-family:var(--mono); font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(244,234,214,.6); display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <span>Faites défiler</span>
+      <span style="animation:bob70 1.8s ease-in-out infinite;">↓</span>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section style="background:var(--brown); color:var(--paper); border-bottom:1px solid rgba(244,234,214,.1);">
+    <div style="max-width:1320px; margin:0 auto; padding:22px 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;">
+      <div style="display:flex; align-items:center; gap:14px;"><span style="color:var(--orange); font-size:20px;">✦</span><div><div style="font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;">Livraison offerte</div><div style="font-size:13px; color:rgba(244,234,214,.6);">Dès 100&nbsp;$ d'achat</div></div></div>
+      <div style="display:flex; align-items:center; gap:14px;"><span style="color:var(--orange); font-size:20px;">◐</span><div><div style="font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;">Pièces authentiques</div><div style="font-size:13px; color:rgba(244,234,214,.6);">Chinées et restaurées</div></div></div>
+      <div style="display:flex; align-items:center; gap:14px;"><span style="color:var(--orange); font-size:20px;">↺</span><div><div style="font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;">Retours 30 jours</div><div style="font-size:13px; color:rgba(244,234,214,.6);">Sans tracas</div></div></div>
+      <div style="display:flex; align-items:center; gap:14px;"><span style="color:var(--orange); font-size:20px;">◆</span><div><div style="font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;">Paiement sécurisé</div><div style="font-size:13px; color:rgba(244,234,214,.6);">Cryptage SSL</div></div></div>
+    </div>
+  </section>
+
+  <!-- FEATURED COLLECTIONS -->
+  <section id="collections" style="max-width:1320px; margin:0 auto; padding:clamp(64px,9vw,120px) 28px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:40px;">
+      <div>
+        <div style="font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--orange); margin-bottom:14px;">✦&nbsp;&nbsp;Tendances du moment</div>
+        <h2 style="font-family:var(--disp); font-weight:400; font-size:clamp(34px,5vw,64px); line-height:.96; margin:0; max-width:16ch;">Magasinez par univers</h2>
+      </div>
+      <a href="#shop" style="font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); text-decoration:none; border-bottom:1.5px solid var(--orange); padding-bottom:4px; transition:color .2s;" style-hover="color:var(--orange)">Tout magasiner →</a>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;">
+      <!-- feature tile -->
+      <a href="#shop" style="grid-column:span 2; min-width:0; position:relative; border-radius:14px; overflow:hidden; aspect-ratio:16/11; text-decoration:none; display:block; background:var(--brown2);">
+        <image-slot id="col-walls" shape="rect" fit="cover" placeholder="Walls of the 70s — mur galerie, posters & cadres" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .6s ease;" style-hover="transform:scale(1.05)"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 35%, rgba(20,12,4,.82) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; left:24px; bottom:22px; right:24px; pointer-events:none;">
+          <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--mustard); margin-bottom:8px;">01 · Collection</div>
+          <div style="font-family:var(--disp); font-size:clamp(28px,3.4vw,44px); color:var(--paper); line-height:.95; margin-bottom:8px;">Walls of the 70s</div>
+          <div style="font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; color:rgba(244,234,214,.78); line-height:1.5;">Posters rock · jazz · cinéma · Van Gogh · Picasso · cadres dorés &amp; boisés</div>
+        </div>
+      </a>
+      <a href="#shop" style="grid-column:span 2; min-width:0; position:relative; border-radius:14px; overflow:hidden; aspect-ratio:16/11; text-decoration:none; display:block; background:var(--brown2);">
+        <image-slot id="col-sound" shape="rect" fit="cover" placeholder="Sound & Soul — tourne-disques, vinyles, casques" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .6s ease;" style-hover="transform:scale(1.05)"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 35%, rgba(20,12,4,.82) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; left:24px; bottom:22px; right:24px; pointer-events:none;">
+          <div style="font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--mustard); margin-bottom:8px;">02 · Collection</div>
+          <div style="font-family:var(--disp); font-size:clamp(28px,3.4vw,44px); color:var(--paper); line-height:.95; margin-bottom:8px;">Sound &amp; Soul</div>
+          <div style="font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; color:rgba(244,234,214,.78); line-height:1.5;">Tables tournantes · vinyles · casques &amp; AirPods · radios vintage</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:16px;">
+      <a href="#shop" style="min-width:0; position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; text-decoration:none; display:block; background:var(--brown2);">
+        <image-slot id="col-living" shape="rect" fit="cover" placeholder="The Living Room — tapis, lampes ambrées, cuir" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .6s ease;" style-hover="transform:scale(1.06)"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 38%, rgba(20,12,4,.82) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; left:18px; bottom:18px; right:18px; pointer-events:none;"><div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--mustard); margin-bottom:6px;">03 · Collection</div><div style="font-family:var(--disp); font-size:24px; color:var(--paper); line-height:1; margin-bottom:7px;">The Living Room</div><div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; color:rgba(244,234,214,.74); line-height:1.45;">Tapis persans &amp; boho · lampes ambrées · coussins cuir · tables d'appoint</div></div>
+      </a>
+      <a href="#shop" style="min-width:0; position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; text-decoration:none; display:block; background:var(--brown2);">
+        <image-slot id="col-capture" shape="rect" fit="cover" placeholder="Capture & Mémoire — caméras, pellicules, albums" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .6s ease;" style-hover="transform:scale(1.06)"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 38%, rgba(20,12,4,.82) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; left:18px; bottom:18px; right:18px; pointer-events:none;"><div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--mustard); margin-bottom:6px;">04 · Collection</div><div style="font-family:var(--disp); font-size:24px; color:var(--paper); line-height:1; margin-bottom:7px;">Capture &amp; Mémoire</div><div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; color:rgba(244,234,214,.74); line-height:1.45;">Caméras jetables · pellicules 35mm · cadres photo · albums vintage</div></div>
+      </a>
+      <a href="#shop" style="min-width:0; position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; text-decoration:none; display:block; background:var(--brown2);">
+        <image-slot id="col-art" shape="rect" fit="cover" placeholder="Art & Culture — prints d'artistes, papeterie" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .6s ease;" style-hover="transform:scale(1.06)"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 38%, rgba(20,12,4,.82) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; left:18px; bottom:18px; right:18px; pointer-events:none;"><div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--mustard); margin-bottom:6px;">05 · Collection</div><div style="font-family:var(--disp); font-size:24px; color:var(--paper); line-height:1; margin-bottom:7px;">Art &amp; Culture</div><div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; color:rgba(244,234,214,.74); line-height:1.45;">Posters d'exposition · prints d'artistes · typographie murale · papeterie</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- NEW DROPS -->
+  <section id="shop" style="background:var(--paper); border-top:1px solid rgba(42,27,12,.08); border-bottom:1px solid rgba(42,27,12,.08);">
+    <div style="max-width:1320px; margin:0 auto; padding:clamp(64px,9vw,120px) 28px;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:40px;">
+        <div>
+          <div style="font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--orange); margin-bottom:14px;">✦&nbsp;&nbsp;Fraîchement chinés</div>
+          <h2 style="font-family:var(--disp); font-weight:400; font-size:clamp(34px,5vw,64px); line-height:.96; margin:0;">Derniers arrivages</h2>
+        </div>
+        <a href="#shop" style="font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); text-decoration:none; border-bottom:1.5px solid var(--orange); padding-bottom:4px; transition:color .2s;" style-hover="color:var(--orange)">Voir les nouveautés →</a>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px;">
+        <!-- card -->
+        <div style="background:var(--cream); border:1px solid rgba(42,27,12,.1); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-6px); box-shadow:0 22px 40px rgba(33,20,5,.16)">
+          <div style="position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--cream2);">
+            <image-slot id="prod-1" shape="rect" fit="cover" placeholder="Affiche Cosmic Ride" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .5s ease;" style-hover="transform:scale(1.05)"></image-slot>
+            <div style="position:absolute; top:12px; left:12px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; background:var(--orange); color:var(--paper); padding:5px 9px; border-radius:999px;">Nouveau</div>
+          </div>
+          <div style="padding:16px 16px 18px;">
+            <div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:7px;">Posters</div>
+            <div style="font-weight:600; font-size:15.5px; line-height:1.25; margin-bottom:12px;">Affiche « Cosmic Ride »</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <span style="font-family:var(--mono); font-size:15px; font-weight:700;">38&nbsp;$</span>
+              <button style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; background:var(--brown); color:var(--paper); border:none; padding:9px 14px; border-radius:999px; cursor:pointer; transition:background .2s;" style-hover="background:var(--orange)">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--cream); border:1px solid rgba(42,27,12,.1); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-6px); box-shadow:0 22px 40px rgba(33,20,5,.16)">
+          <div style="position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--cream2);">
+            <image-slot id="prod-2" shape="rect" fit="cover" placeholder="Vinyle Funk Anthology" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .5s ease;" style-hover="transform:scale(1.05)"></image-slot>
+          </div>
+          <div style="padding:16px 16px 18px;">
+            <div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:7px;">Vinyles</div>
+            <div style="font-weight:600; font-size:15.5px; line-height:1.25; margin-bottom:12px;">Funk Anthology · Vol. 3</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <span style="font-family:var(--mono); font-size:15px; font-weight:700;">45&nbsp;$</span>
+              <button style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; background:var(--brown); color:var(--paper); border:none; padding:9px 14px; border-radius:999px; cursor:pointer; transition:background .2s;" style-hover="background:var(--orange)">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--cream); border:1px solid rgba(42,27,12,.1); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-6px); box-shadow:0 22px 40px rgba(33,20,5,.16)">
+          <div style="position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--cream2);">
+            <image-slot id="prod-3" shape="rect" fit="cover" placeholder="Lampe Globe Ambre" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .5s ease;" style-hover="transform:scale(1.05)"></image-slot>
+          </div>
+          <div style="padding:16px 16px 18px;">
+            <div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:7px;">Lampes</div>
+            <div style="font-weight:600; font-size:15.5px; line-height:1.25; margin-bottom:12px;">Lampe Globe Ambre</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <span style="font-family:var(--mono); font-size:15px; font-weight:700;">120&nbsp;$</span>
+              <button style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; background:var(--brown); color:var(--paper); border:none; padding:9px 14px; border-radius:999px; cursor:pointer; transition:background .2s;" style-hover="background:var(--orange)">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--cream); border:1px solid rgba(42,27,12,.1); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-6px); box-shadow:0 22px 40px rgba(33,20,5,.16)">
+          <div style="position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--cream2);">
+            <image-slot id="prod-4" shape="rect" fit="cover" placeholder="Caméra jetable Sunset" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .5s ease;" style-hover="transform:scale(1.05)"></image-slot>
+            <div style="position:absolute; top:12px; left:12px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; background:var(--avocado); color:var(--paper); padding:5px 9px; border-radius:999px;">Populaire</div>
+          </div>
+          <div style="padding:16px 16px 18px;">
+            <div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:7px;">Caméras</div>
+            <div style="font-weight:600; font-size:15.5px; line-height:1.25; margin-bottom:12px;">Jetable « Sunset » 35mm</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <span style="font-family:var(--mono); font-size:15px; font-weight:700;">24&nbsp;$</span>
+              <button style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; background:var(--brown); color:var(--paper); border:none; padding:9px 14px; border-radius:999px; cursor:pointer; transition:background .2s;" style-hover="background:var(--orange)">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--cream); border:1px solid rgba(42,27,12,.1); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-6px); box-shadow:0 22px 40px rgba(33,20,5,.16)">
+          <div style="position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--cream2);">
+            <image-slot id="prod-5" shape="rect" fit="cover" placeholder="Tourne-disque Walnut Mk2" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .5s ease;" style-hover="transform:scale(1.05)"></image-slot>
+          </div>
+          <div style="padding:16px 16px 18px;">
+            <div style="font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:7px;">Audio</div>
+            <div style="font-weight:600; font-size:15.5px; line-height:1.25; margin-bottom:12px;">Tourne-disque Walnut Mk2</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <span style="font-family:var(--mono); font-size:15px; font-weight:700;">240&nbsp;$</span>
+              <button style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; background:var(--brown); color:var(--paper); border:none; padding:9px 14px; border-radius:999px; cursor:pointer; transition:background .2s;" style-hover="background:var(--orange)">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <section id="histoire" style="background:var(--brown); color:var(--paper);">
+    <div style="max-width:1320px; margin:0 auto; padding:clamp(64px,9vw,128px) 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(36px,5vw,80px); align-items:center;">
+      <div style="position:relative; min-width:0;">
+        <div style="position:relative; border-radius:16px; overflow:hidden; aspect-ratio:4/5;">
+          <image-slot id="story-img" shape="rect" fit="cover" placeholder="Portrait fondateur / atelier — ambiance chaude, vinyles" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+        </div>
+        <div data-vinyl style="position:absolute; bottom:-26px; right:-10px; width:120px; height:120px; border-radius:50%; animation:spin70 8s linear infinite; background:repeating-radial-gradient(circle at 50% 50%, #15100a 0 1.5px, #0a0805 1.5px 3.5px); display:flex; align-items:center; justify-content:center; box-shadow:0 14px 34px rgba(0,0,0,.5);">
+          <div style="width:36%; height:36%; border-radius:50%; background:radial-gradient(circle, var(--mustard) 0 60%, #a9781f 61% 100%);"></div>
+        </div>
+      </div>
+      <div style="min-width:0;">
+        <div style="font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--mustard); margin-bottom:18px;">✦&nbsp;&nbsp;Notre histoire</div>
+        <h2 style="font-family:var(--disp); font-weight:400; font-size:clamp(32px,4.4vw,58px); line-height:1; margin:0 0 24px; max-width:16ch;">On ne vend pas des objets. On vend une ambiance.</h2>
+        <p style="color:rgba(244,234,214,.82); font-size:17px; line-height:1.65; margin:0 0 18px;">The 70s Studio est né d'une obsession : retrouver la chaleur d'une époque où la musique se touchait, où la lumière était ambrée et où chaque objet avait une âme. Nous chinons, restaurons et sélectionnons chaque pièce comme un disque rare.</p>
+        <p style="color:rgba(244,234,214,.82); font-size:17px; line-height:1.65; margin:0 0 30px;">Une boutique pensée comme un disquaire underground — réinventée en marque lifestyle premium. Le grain, le groove, le vécu : à travers un regard d'aujourd'hui.</p>
+        <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+          <a href="#histoire" style="display:inline-flex; align-items:center; gap:10px; background:var(--orange); color:var(--paper); font-family:var(--mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; padding:15px 26px; border-radius:999px; text-decoration:none; transition:background .22s, transform .22s;" style-hover="background:var(--orange-d); transform:translateY(-2px)">Découvrir l'atelier →</a>
+          <div style="font-family:var(--disp); font-size:26px; color:var(--mustard); transform:rotate(-4deg);">— Léo &amp; Margaux</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL BANNER -->
+  <section style="position:relative; height:clamp(420px,60vh,640px); overflow:hidden; background:var(--brown2);">
+    <image-slot id="banner-img" shape="rect" fit="cover" placeholder="Photo argentique pleine largeur — scène de vie, grain, tons chauds" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(20,12,4,.72), rgba(20,12,4,.28));"></div>
+    <div style="position:relative; z-index:2; max-width:1320px; margin:0 auto; height:100%; padding:0 28px; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-family:var(--mono); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--mustard); margin-bottom:20px;">✦&nbsp;&nbsp;Le manifeste</div>
+      <p style="font-family:var(--disp); font-weight:400; color:var(--paper); font-size:clamp(30px,5vw,72px); line-height:1.02; margin:0; max-width:18ch;">« Vivre dans l'instant, mais avec une bande-son de 1973. »</p>
+    </div>
+  </section>
+
+  <!-- VINYL SPOTLIGHT -->
+  <section style="background:var(--avocado); color:var(--paper);">
+    <div style="max-width:1320px; margin:0 auto; padding:clamp(56px,8vw,104px) 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:clamp(36px,5vw,72px); align-items:center;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:18px; min-width:0;">
+        <div ref="{{ containerRef }}" style="position:relative; width:min(380px,82vw); aspect-ratio:1; perspective:1100px; cursor:grab; touch-action:none; user-select:none;">
+          <div ref="{{ discRef }}" style="position:absolute; inset:0; transform-style:preserve-3d; will-change:transform; transform:rotateX(4deg);">
+            <!-- record edge / thickness -->
+            <div style="position:absolute; inset:0; border-radius:50%; background:#070504; transform:translateZ(-12px); box-shadow:0 34px 70px rgba(0,0,0,.55);"></div>
+            <!-- playing surface (spins) -->
+            <div ref="{{ spinRef }}" style="position:absolute; inset:0; border-radius:50%; will-change:transform; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 50%, #1a120a 0 30%, #0a0705 30%), repeating-radial-gradient(circle at 50% 50%, #17100a 0 1.6px, #090604 1.6px 3.6px);">
+              <div style="width:34%; height:34%; border-radius:50%; overflow:hidden; box-shadow:0 0 0 5px #060403, 0 0 0 6px rgba(214,152,42,.4);">
+                <image-slot id="vinyl-cover" shape="rect" fit="cover" placeholder="Pochette" style="width:100%; height:100%; display:block;"></image-slot>
+              </div>
+              <div style="position:absolute; width:4%; height:4%; border-radius:50%; background:var(--avocado); box-shadow:0 0 0 2px rgba(0,0,0,.5);"></div>
+            </div>
+            <!-- light sheen (tilts, does not spin) -->
+            <div style="position:absolute; inset:0; border-radius:50%; pointer-events:none; mix-blend-mode:screen; opacity:.55; background:linear-gradient(125deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 60%, rgba(255,255,255,.12) 100%);"></div>
+          </div>
+        </div>
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(244,234,214,.75);">↻ Glissez le disque · suivez le curseur</div>
+      </div>
+      <div style="min-width:0;">
+        <div style="font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--paper); opacity:.75; margin-bottom:16px;">✦&nbsp;&nbsp;Le disque du mois</div>
+        <h2 style="font-family:var(--disp); font-weight:400; font-size:clamp(30px,4vw,52px); line-height:1; margin:0 0 10px;">Midnight Boogie</h2>
+        <div style="font-size:17px; opacity:.85; margin-bottom:22px;">The Velvet Hours · Pressage 180g · 1974</div>
+        <p style="font-size:16px; line-height:1.65; opacity:.9; max-width:46ch; margin:0 0 28px;">Une réédition rare, remastérisée à partir des bandes originales. Pochette gaufrée, vinyle ambré translucide. Tirage limité à 500 exemplaires numérotés.</p>
+        <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+          <span style="font-family:var(--mono); font-size:22px; font-weight:700;">58&nbsp;$</span>
+          <button style="font-family:var(--mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; background:var(--orange); color:var(--paper); border:none; padding:15px 28px; border-radius:999px; cursor:pointer; transition:background .22s, transform .22s;" style-hover="background:var(--orange-d); transform:translateY(-2px)">Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section id="journal" style="max-width:1320px; margin:0 auto; padding:clamp(64px,9vw,120px) 28px;">
+    <div style="text-align:center; margin-bottom:44px;">
+      <div style="font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--orange); margin-bottom:14px;">✦&nbsp;&nbsp;Restez connecté</div>
+      <h2 style="font-family:var(--disp); font-weight:400; font-size:clamp(32px,5vw,60px); line-height:.98; margin:0 0 10px;">Suivez-nous @the70sstudio</h2>
+      <div style="font-family:var(--mono); font-size:13px; letter-spacing:.08em; color:var(--muted);">48,2k abonnés · #vibeseventies</div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:64px;">
+      <div style="position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--cream2);"><image-slot id="ig-1" shape="rect" fit="cover" placeholder="@ post" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .4s ease;" style-hover="transform:scale(1.08)"></image-slot></div>
+      <div style="position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--cream2);"><image-slot id="ig-2" shape="rect" fit="cover" placeholder="@ post" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .4s ease;" style-hover="transform:scale(1.08)"></image-slot></div>
+      <div style="position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--cream2);"><image-slot id="ig-3" shape="rect" fit="cover" placeholder="@ post" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .4s ease;" style-hover="transform:scale(1.08)"></image-slot></div>
+      <div style="position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--cream2);"><image-slot id="ig-4" shape="rect" fit="cover" placeholder="@ post" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .4s ease;" style-hover="transform:scale(1.08)"></image-slot></div>
+      <div style="position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--cream2);"><image-slot id="ig-5" shape="rect" fit="cover" placeholder="@ post" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .4s ease;" style-hover="transform:scale(1.08)"></image-slot></div>
+      <div style="position:relative; aspect-ratio:1; border-radius:12px; overflow:hidden; background:var(--cream2);"><image-slot id="ig-6" shape="rect" fit="cover" placeholder="@ post" style="position:absolute; inset:0; width:100%; height:100%; transition:transform .4s ease;" style-hover="transform:scale(1.08)"></image-slot></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+      <div style="background:var(--paper); border:1px solid rgba(42,27,12,.1); border-radius:14px; padding:28px;">
+        <div style="color:var(--orange); letter-spacing:.2em; font-size:15px; margin-bottom:14px;">★★★★★</div>
+        <p style="font-size:16px; line-height:1.6; margin:0 0 18px;">« La lampe globe ambre a transformé mon salon. Emballage soigné, qualité irréprochable. On sent l'amour du détail. »</p>
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">Sophie L. · Montréal</div>
+      </div>
+      <div style="background:var(--paper); border:1px solid rgba(42,27,12,.1); border-radius:14px; padding:28px;">
+        <div style="color:var(--orange); letter-spacing:.2em; font-size:15px; margin-bottom:14px;">★★★★★</div>
+        <p style="font-size:16px; line-height:1.6; margin:0 0 18px;">« Mon tourne-disque Walnut est une pièce maîtresse. Le son, l'objet, l'expérience — tout respire les seventies. »</p>
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">Marc-André D. · Québec</div>
+      </div>
+      <div style="background:var(--paper); border:1px solid rgba(42,27,12,.1); border-radius:14px; padding:28px;">
+        <div style="color:var(--orange); letter-spacing:.2em; font-size:15px; margin-bottom:14px;">★★★★★</div>
+        <p style="font-size:16px; line-height:1.6; margin:0 0 18px;">« Enfin une boutique vintage qui se prend au sérieux sans tomber dans le kitsch. Une vraie direction artistique. »</p>
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);">Camille R. · Laval</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section style="background:var(--mustard); color:var(--brown);">
+    <div style="max-width:920px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px; text-align:center;">
+      <div style="font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--brown); opacity:.7; margin-bottom:16px;">✦&nbsp;&nbsp;Le club du studio</div>
+      <h2 style="font-family:var(--disp); font-weight:400; font-size:clamp(32px,5vw,58px); line-height:1; margin:0 0 16px;">Rejoignez le club.</h2>
+      <p style="font-size:17px; line-height:1.6; max-width:46ch; margin:0 auto 30px; opacity:.85;">Accès anticipé aux nouveaux arrivages, drops exclusifs et 10&nbsp;% sur votre première commande.</p>
+      <form onSubmit="{{ noSubmit }}" style="display:flex; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap;">
+        <input type="email" placeholder="Votre adresse courriel" style="flex:1; min-width:200px; background:var(--paper); border:1.5px solid rgba(33,20,5,.25); border-radius:999px; padding:15px 22px; font-family:var(--sans); font-size:15px; color:var(--ink); outline:none;" />
+        <button type="submit" style="font-family:var(--mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; background:var(--brown); color:var(--paper); border:none; padding:15px 28px; border-radius:999px; cursor:pointer; transition:background .22s, transform .22s;" style-hover="background:var(--orange); transform:translateY(-2px)">S'inscrire</button>
+      </form>
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.06em; opacity:.6; margin-top:16px;">En vous inscrivant, vous acceptez nos conditions.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:var(--brown); color:var(--paper);">
+    <div style="max-width:1320px; margin:0 auto; padding:clamp(56px,7vw,88px) 28px 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:40px 24px; padding-bottom:48px; border-bottom:1px solid rgba(244,234,214,.14);">
+        <div style="grid-column:span 2; min-width:0;">
+          <div style="font-family:var(--disp); font-size:28px; line-height:.9; margin-bottom:16px;">THE 70<span style="color:var(--orange);">s</span> STUDIO</div>
+          <p style="font-size:14.5px; line-height:1.6; color:rgba(244,234,214,.66); max-width:34ch; margin:0;">Disquaire underground réinventé en marque lifestyle. Posters, vinyles, lampes et trouvailles analogiques — chinés avec soin au Québec.</p>
+        </div>
+        <div>
+          <div style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mustard); margin-bottom:16px;">Boutique</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="#shop" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Vinyles</a>
+            <a href="#shop" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Posters &amp; affiches</a>
+            <a href="#shop" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Lampes &amp; déco</a>
+            <a href="#shop" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Vêtements vintage</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mustard); margin-bottom:16px;">Aide</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="#" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Livraison</a>
+            <a href="#" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Retours</a>
+            <a href="#" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">FAQ</a>
+            <a href="#" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Nous joindre</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mustard); margin-bottom:16px;">Le studio</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <a href="#histoire" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Notre histoire</a>
+            <a href="#journal" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Journal</a>
+            <a href="#" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">Instagram</a>
+            <a href="#" style="color:rgba(244,234,214,.78); text-decoration:none; font-size:14px; transition:color .2s;" style-hover="color:var(--orange)">TikTok</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; padding:26px 0 40px;">
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:rgba(244,234,214,.5);">© 2026 The 70s Studio · Fait avec ❤ au Québec</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <span style="font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:rgba(244,234,214,.7); border:1px solid rgba(244,234,214,.2); padding:5px 9px; border-radius:6px;">VISA</span>
+          <span style="font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:rgba(244,234,214,.7); border:1px solid rgba(244,234,214,.2); padding:5px 9px; border-radius:6px;">MASTERCARD</span>
+          <span style="font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:rgba(244,234,214,.7); border:1px solid rgba(244,234,214,.2); padding:5px 9px; border-radius:6px;">AMEX</span>
+          <span style="font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:rgba(244,234,214,.7); border:1px solid rgba(244,234,214,.2); padding:5px 9px; border-radius:6px;">PAYPAL</span>
+          <span style="font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:rgba(244,234,214,.7); border:1px solid rgba(244,234,214,.2); padding:5px 9px; border-radius:6px;">APPLE PAY</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:3400},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#E5602B&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#E5602B&quot;,&quot;#D6432E&quot;,&quot;#C99A1E&quot;,&quot;#1F6B4C&quot;]},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;vinylSpin&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  containerRef = React.createRef();
+  discRef = React.createRef();
+  spinRef = React.createRef();
+  renderVals() {
+    return {
+      rootRef: this.rootRef,
+      containerRef: this.containerRef,
+      discRef: this.discRef,
+      spinRef: this.spinRef,
+      noSubmit: (e) => { e.preventDefault(); }
+    };
+  }
+  componentDidMount() {
+    const el = this.rootRef.current;
+    if (el) {
+      const a = this.props.accent;
+      if (a) { el.style.setProperty('--orange', a); }
+      if (this.props.grain === false) {
+        const g = el.querySelector('[data-grain]');
+        if (g) g.style.display = 'none';
+      }
+      if (this.props.vinylSpin === false) {
+        el.querySelectorAll('[data-vinyl]').forEach(v => { v.style.animation = 'none'; });
+      }
+    }
+    this._setupVinyl();
+  }
+  componentWillUnmount() {
+    if (this._vinylCleanup) this._vinylCleanup();
+  }
+  _setupVinyl() {
+    const cont = this.containerRef.current;
+    const tilt = this.discRef.current;
+    const spin = this.spinRef.current;
+    if (!cont || !tilt || !spin) return;
+
+    const idle = this.props.vinylSpin === false ? 0 : 0.6;
+    const maxTilt = 16;
+    let angle = 0, vel = idle;
+    let tx = 4, ty = 0, ctx = 4, cty = 0;
+    let dragging = false, lastX = 0;
+
+    const onMove = (e) => {
+      const r = cont.getBoundingClientRect();
+      const px = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+      const py = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+      ty = Math.max(-1, Math.min(1, px)) * maxTilt;
+      tx = -Math.max(-1, Math.min(1, py)) * maxTilt + 4;
+      if (dragging) {
+        vel = (e.clientX - lastX) * 0.9;
+        lastX = e.clientX;
+      }
+    };
+    const onLeave = () => { if (!dragging) { tx = 4; ty = 0; } };
+    const onDown = (e) => {
+      dragging = true; lastX = e.clientX; vel = 0;
+      cont.style.cursor = 'grabbing';
+      try { cont.setPointerCapture(e.pointerId); } catch (_) {}
+    };
+    const onUp = () => { if (dragging) { dragging = false; cont.style.cursor = 'grab'; } };
+
+    cont.addEventListener('pointermove', onMove);
+    cont.addEventListener('pointerleave', onLeave);
+    cont.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointerup', onUp);
+
+    const loop = () => {
+      if (!dragging) { vel += (idle - vel) * 0.03; }
+      angle += vel;
+      ctx += (tx - ctx) * 0.09;
+      cty += (ty - cty) * 0.09;
+      tilt.style.transform = 'rotateX(' + ctx.toFixed(2) + 'deg) rotateY(' + cty.toFixed(2) + 'deg)';
+      spin.style.transform = 'rotateZ(' + angle.toFixed(2) + 'deg)';
+      this._raf = requestAnimationFrame(loop);
+    };
+    loop();
+
+    this._vinylCleanup = () => {
+      cancelAnimationFrame(this._raf);
+      cont.removeEventListener('pointermove', onMove);
+      cont.removeEventListener('pointerleave', onLeave);
+      cont.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointerup', onUp);
+    };
+  }
+}
+</script>
+</body>
+</html>
