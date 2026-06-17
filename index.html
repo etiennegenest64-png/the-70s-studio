@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 70s Studio — Décoration & Lifestyle Rétro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #EFE3CD;
+      --cream2: #E7D6B8;
+      --paper: #F4EAD6;
+      --brown: #211405;
+      --brown2: #39260F;
+      --ink: #2A1B0C;
+      --muted: #806F54;
+      --orange: #E5602B;
+      --orange-d: #C44C1E;
+      --mustard: #D6982A;
+      --avocado: #5E6730;
+      --rust: #A8492A;
+      --disp: 'Alfa Slab One', Georgia, serif;
+      --sans: 'Archivo', system-ui, sans-serif;
+      --mono: 'Space Mono', ui-monospace, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: var(--sans); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+    ::selection { background: var(--orange); color: var(--paper); }
+
+    /* GRAIN OVERLAY */
+    .grain {
+      position: fixed; inset: 0; z-index: 9000; pointer-events: none;
+      mix-blend-mode: overlay; opacity: .42;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ANIMATIONS */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes bob { 0%, 100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(7px); opacity: 1; } }
+
+    /* ANNOUNCEMENT BAR */
+    .announcement {
+      background: var(--brown); color: var(--paper);
+      overflow: hidden; white-space: nowrap;
+      border-bottom: 1px solid rgba(244,234,214,.14);
+    }
+    .announcement__track {
+      display: inline-flex; gap: 0;
+      animation: marquee 26s linear infinite;
+    }
+    .announcement__inner {
+      display: inline-flex; align-items: center;
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: .18em; text-transform: uppercase; padding: 10px 0;
+    }
+    .announcement__inner span { padding: 0 26px; }
+    .announcement__inner .dot { color: var(--orange); }
+
+    /* HEADER */
+    .header {
+      position: sticky; top: 0; z-index: 8000;
+      background: rgba(239,227,205,.88); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(42,27,12,.12);
+    }
+    .header__inner {
+      max-width: 1320px; margin: 0 auto;
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .header__nav { display: flex; align-items: center; gap: 26px; flex: 1; min-width: 220px; }
+    .header__nav a {
+      font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink); transition: color .2s;
+    }
+    .header__nav a:hover { color: var(--orange); }
+    .header__logo {
+      font-family: var(--disp); font-size: 25px; line-height: .9;
+      color: var(--ink); letter-spacing: .01em; flex: 0 0 auto; text-align: center;
+    }
+    .header__logo span { color: var(--orange); }
+    .header__actions { display: flex; align-items: center; justify-content: flex-end; gap: 20px; flex: 1; min-width: 220px; }
+    .header__actions a {
+      font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink); transition: color .2s;
+    }
+    .header__actions a:hover { color: var(--orange); }
+    .btn-cart {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--paper); background: var(--brown);
+      padding: 9px 15px; border-radius: 999px; transition: background .2s, transform .2s;
+    }
+    .btn-cart:hover { background: var(--orange); transform: translateY(-1px); }
+    .btn-cart__badge {
+      background: var(--orange); color: var(--paper); border-radius: 999px;
+      min-width: 18px; height: 18px; display: inline-flex; align-items: center;
+      justify-content: center; font-size: 11px;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative; height: clamp(580px, 90vh, 900px);
+      overflow: hidden; background: var(--brown);
+    }
+    .hero__bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: .7;
+    }
+    .hero__placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #3d2008 0%, #1a0d03 50%, #2d1a07 100%);
+    }
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,12,4,.34) 0%, rgba(20,12,4,.18) 38%, rgba(20,12,4,.74) 100%);
+    }
+    .hero__glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(120% 80% at 18% 30%, rgba(229,96,43,.16), transparent 60%);
+    }
+    .hero__vinyl {
+      position: absolute; top: 8%; right: 5%;
+      width: clamp(120px, 15vw, 210px); height: clamp(120px, 15vw, 210px);
+      border-radius: 50%;
+      animation: spin 9s linear infinite;
+      background: repeating-radial-gradient(circle at 50% 50%, #15100a 0 1.5px, #0a0805 1.5px 3.5px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.5);
+      display: flex; align-items: center; justify-content: center; opacity: .92;
+    }
+    .hero__vinyl-label {
+      width: 34%; height: 34%; border-radius: 50%;
+      background: radial-gradient(circle, var(--orange) 0 60%, #b34419 61% 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero__vinyl-hole { width: 14%; height: 14%; border-radius: 50%; background: var(--brown); }
+    .hero__content {
+      position: relative; z-index: 2; max-width: 1320px; margin: 0 auto;
+      height: 100%; padding: 0 28px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-bottom: clamp(48px, 8vh, 96px);
+    }
+    .hero__eyebrow {
+      font-family: var(--mono); font-size: 13px; letter-spacing: .26em;
+      text-transform: uppercase; color: var(--mustard); margin-bottom: 20px;
+    }
+    .hero__title {
+      font-family: var(--disp); font-weight: 400; color: var(--paper);
+      font-size: clamp(48px, 9vw, 128px); line-height: .92; letter-spacing: -.01em;
+      max-width: 14ch; text-shadow: 0 4px 30px rgba(0,0,0,.35); margin-bottom: 0;
+    }
+    .hero__subtitle {
+      color: rgba(244,234,214,.86); font-size: clamp(16px, 1.5vw, 20px);
+      line-height: 1.5; max-width: 48ch; margin: 24px 0 34px;
+    }
+    .hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero__scroll {
+      position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 2;
+      font-family: var(--mono); font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      color: rgba(244,234,214,.6); display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .hero__scroll-arrow { animation: bob 1.8s ease-in-out infinite; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: var(--paper);
+      font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      padding: 16px 28px; border-radius: 999px; border: none; cursor: pointer;
+      transition: background .22s, transform .22s, box-shadow .22s;
+      box-shadow: 0 10px 26px rgba(229,96,43,.36);
+    }
+    .btn-primary:hover { background: var(--orange-d); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(229,96,43,.5); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--paper);
+      font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      padding: 16px 28px; border-radius: 999px;
+      border: 1.5px solid rgba(244,234,214,.55);
+      transition: background .22s, border-color .22s;
+    }
+    .btn-outline:hover { background: rgba(244,234,214,.12); border-color: var(--paper); }
+
+    /* TRUST STRIP */
+    .trust {
+      background: var(--brown); color: var(--paper);
+      border-bottom: 1px solid rgba(244,234,214,.1);
+    }
+    .trust__inner {
+      max-width: 1320px; margin: 0 auto; padding: 22px 28px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;
+    }
+    .trust__item { display: flex; align-items: center; gap: 14px; }
+    .trust__icon { color: var(--orange); font-size: 20px; flex-shrink: 0; }
+    .trust__label { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+    .trust__sub { font-size: 13px; color: rgba(244,234,214,.6); margin-top: 2px; }
+
+    /* CONTAINER */
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 28px; }
+
+    /* SECTION HEADERS */
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: var(--disp); font-weight: 400;
+      font-size: clamp(34px, 5vw, 64px); line-height: .96; max-width: 16ch;
+    }
+    .section-header-row {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .section-link {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink);
+      border-bottom: 1.5px solid var(--orange); padding-bottom: 4px;
+      transition: color .2s; white-space: nowrap;
+    }
+    .section-link:hover { color: var(--orange); }
+
+    /* COLLECTIONS */
+    .collections { padding: clamp(64px, 9vw, 120px) 28px; }
+    .col-grid-main {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px;
+    }
+    .col-grid-sub {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;
+    }
+    .col-tile {
+      position: relative; border-radius: 14px; overflow: hidden;
+      text-decoration: none; display: block; background: var(--brown2);
+    }
+    .col-tile--tall { aspect-ratio: 4/5; }
+    .col-tile--wide { aspect-ratio: 16/11; }
+    .col-tile__img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transition: transform .6s ease;
+    }
+    .col-tile:hover .col-tile__img { transform: scale(1.05); }
+    .col-tile__placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--brown2), #1a0e06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .col-tile__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(20,12,4,.82) 100%);
+      pointer-events: none;
+    }
+    .col-tile__info { position: absolute; left: 24px; bottom: 22px; right: 24px; pointer-events: none; }
+    .col-tile__info--sm { left: 18px; bottom: 18px; right: 18px; }
+    .col-tile__num {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--mustard); margin-bottom: 8px;
+    }
+    .col-tile__name {
+      font-family: var(--disp); font-size: clamp(28px, 3.4vw, 44px);
+      color: var(--paper); line-height: .95; margin-bottom: 8px;
+    }
+    .col-tile__name--sm { font-size: 24px; margin-bottom: 7px; }
+    .col-tile__desc {
+      font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+      color: rgba(244,234,214,.78); line-height: 1.5;
+    }
+    .col-tile__desc--sm { font-size: 10.5px; letter-spacing: .05em; color: rgba(244,234,214,.74); line-height: 1.45; }
+
+    /* PLACEHOLDER ART */
+    .placeholder-art {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(244,234,214,.08);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(244,234,214,.3); text-align: center;
+    }
+
+    /* SHOP */
+    .shop { background: var(--paper); border-top: 1px solid rgba(42,27,12,.08); border-bottom: 1px solid rgba(42,27,12,.08); }
+    .shop__inner { padding: clamp(64px, 9vw, 120px) 28px; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+    .product-card {
+      background: var(--cream); border: 1px solid rgba(42,27,12,.1);
+      border-radius: 14px; overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 22px 40px rgba(33,20,5,.16); }
+    .product-card__img-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--cream2); }
+    .product-card__img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transition: transform .5s ease;
+    }
+    .product-card:hover .product-card__img { transform: scale(1.05); }
+    .product-card__img-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .product-card__badge {
+      position: absolute; top: 12px; left: 12px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--paper);
+      padding: 5px 9px; border-radius: 999px;
+    }
+    .product-card__badge--new { background: var(--orange); }
+    .product-card__badge--pop { background: var(--avocado); }
+    .product-card__body { padding: 16px 16px 18px; }
+    .product-card__cat {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
+    }
+    .product-card__name { font-weight: 600; font-size: 15.5px; line-height: 1.25; margin-bottom: 12px; }
+    .product-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .product-card__price { font-family: var(--mono); font-size: 15px; font-weight: 700; }
+    .btn-add {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+      text-transform: uppercase; background: var(--brown); color: var(--paper);
+      border: none; padding: 9px 14px; border-radius: 999px; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-add:hover { background: var(--orange); }
+
+    /* BRAND STORY */
+    .story { background: var(--brown); color: var(--paper); }
+    .story__inner {
+      padding: clamp(64px, 9vw, 128px) 28px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: clamp(36px, 5vw, 80px); align-items: center;
+    }
+    .story__visual { position: relative; min-width: 0; }
+    .story__img-wrap { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/5; background: var(--brown2); }
+    .story__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .story__vinyl {
+      position: absolute; bottom: -26px; right: -10px;
+      width: 120px; height: 120px; border-radius: 50%;
+      animation: spin 8s linear infinite;
+      background: repeating-radial-gradient(circle at 50% 50%, #15100a 0 1.5px, #0a0805 1.5px 3.5px);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 14px 34px rgba(0,0,0,.5);
+    }
+    .story__vinyl-label { width: 36%; height: 36%; border-radius: 50%; background: radial-gradient(circle, var(--mustard) 0 60%, #a9781f 61% 100%); }
+    .story__content { min-width: 0; }
+    .story__eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--mustard); margin-bottom: 18px;
+    }
+    .story__title {
+      font-family: var(--disp); font-weight: 400;
+      font-size: clamp(32px, 4.4vw, 58px); line-height: 1; margin-bottom: 24px; max-width: 16ch;
+    }
+    .story__text { color: rgba(244,234,214,.82); font-size: 17px; line-height: 1.65; margin-bottom: 18px; }
+    .story__sig { font-family: var(--disp); font-size: 26px; color: var(--mustard); transform: rotate(-4deg); display: inline-block; }
+    .story__ctas { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+
+    /* EDITORIAL BANNER */
+    .editorial {
+      position: relative; height: clamp(420px, 60vh, 640px);
+      overflow: hidden; background: var(--brown2);
+    }
+    .editorial__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .editorial__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(20,12,4,.72), rgba(20,12,4,.28));
+    }
+    .editorial__content {
+      position: relative; z-index: 2; max-width: 1320px; margin: 0 auto;
+      height: 100%; padding: 0 28px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .editorial__label {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .26em;
+      text-transform: uppercase; color: var(--mustard); margin-bottom: 20px;
+    }
+    .editorial__quote {
+      font-family: var(--disp); font-weight: 400; color: var(--paper);
+      font-size: clamp(30px, 5vw, 72px); line-height: 1.02; max-width: 18ch;
+    }
+
+    /* VINYL SPOTLIGHT */
+    .vinyl-section { background: var(--avocado); color: var(--paper); }
+    .vinyl-section__inner {
+      padding: clamp(56px, 8vw, 104px) 28px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(36px, 5vw, 72px); align-items: center;
+    }
+    .vinyl-display { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    .vinyl-disc {
+      width: min(340px, 80vw); height: min(340px, 80vw); border-radius: 50%;
+      background: repeating-radial-gradient(circle at 50% 50%, #15100a 0 1.6px, #090604 1.6px 3.6px);
+      box-shadow: 0 34px 70px rgba(0,0,0,.55);
+      display: flex; align-items: center; justify-content: center;
+      animation: spin 6s linear infinite; position: relative;
+    }
+    .vinyl-disc__label {
+      width: 34%; height: 34%; border-radius: 50%;
+      background: radial-gradient(circle, var(--avocado) 0 60%, #3d4520 61% 100%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 5px #060403, 0 0 0 6px rgba(214,152,42,.4);
+    }
+    .vinyl-disc__hole { width: 12%; height: 12%; border-radius: 50%; background: var(--avocado); }
+    .vinyl-disc__sheen {
+      position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+      mix-blend-mode: screen; opacity: .55;
+      background: linear-gradient(125deg, rgba(255,255,255,.34) 0%, transparent 32%, transparent 60%, rgba(255,255,255,.12) 100%);
+    }
+    .vinyl-hint {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(244,234,214,.75);
+    }
+    .vinyl-info { min-width: 0; }
+    .vinyl-info__eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--paper); opacity: .75; margin-bottom: 16px;
+    }
+    .vinyl-info__title {
+      font-family: var(--disp); font-weight: 400;
+      font-size: clamp(30px, 4vw, 52px); line-height: 1; margin-bottom: 10px;
+    }
+    .vinyl-info__sub { font-size: 17px; opacity: .85; margin-bottom: 22px; }
+    .vinyl-info__desc { font-size: 16px; line-height: 1.65; opacity: .9; max-width: 46ch; margin-bottom: 28px; }
+    .vinyl-info__footer { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .vinyl-info__price { font-family: var(--mono); font-size: 22px; font-weight: 700; }
+
+    /* SOCIAL PROOF */
+    .social { padding: clamp(64px, 9vw, 120px) 28px; }
+    .social__header { text-align: center; margin-bottom: 44px; }
+    .social__title {
+      font-family: var(--disp); font-weight: 400;
+      font-size: clamp(32px, 5vw, 60px); line-height: .98; margin-bottom: 10px;
+    }
+    .social__sub { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--muted); }
+    .ig-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px; margin-bottom: 64px;
+    }
+    .ig-tile {
+      position: relative; aspect-ratio: 1; border-radius: 12px;
+      overflow: hidden; background: var(--cream2);
+    }
+    .ig-tile__placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--cream2), var(--cream));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 18px; color: var(--muted); opacity: .5;
+    }
+    .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .review {
+      background: var(--paper); border: 1px solid rgba(42,27,12,.1);
+      border-radius: 14px; padding: 28px;
+    }
+    .review__stars { color: var(--orange); letter-spacing: .2em; font-size: 15px; margin-bottom: 14px; }
+    .review__text { font-size: 16px; line-height: 1.6; margin-bottom: 18px; }
+    .review__author { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+    /* NEWSLETTER */
+    .newsletter { background: var(--mustard); color: var(--brown); }
+    .newsletter__inner {
+      max-width: 920px; margin: 0 auto;
+      padding: clamp(56px, 8vw, 96px) 28px; text-align: center;
+    }
+    .newsletter__eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--brown); opacity: .7; margin-bottom: 16px;
+    }
+    .newsletter__title {
+      font-family: var(--disp); font-weight: 400;
+      font-size: clamp(32px, 5vw, 58px); line-height: 1; margin-bottom: 16px;
+    }
+    .newsletter__sub { font-size: 17px; line-height: 1.6; max-width: 46ch; margin: 0 auto 30px; opacity: .85; }
+    .newsletter__form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; }
+    .newsletter__input {
+      flex: 1; min-width: 200px; background: var(--paper);
+      border: 1.5px solid rgba(33,20,5,.25); border-radius: 999px;
+      padding: 15px 22px; font-family: var(--sans); font-size: 15px; color: var(--ink); outline: none;
+    }
+    .newsletter__input:focus { border-color: var(--brown); }
+    .btn-dark {
+      font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      background: var(--brown); color: var(--paper); border: none;
+      padding: 15px 28px; border-radius: 999px; cursor: pointer;
+      transition: background .22s, transform .22s;
+    }
+    .btn-dark:hover { background: var(--orange); transform: translateY(-2px); }
+    .newsletter__legal { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; opacity: .6; margin-top: 16px; }
+
+    /* FOOTER */
+    .footer { background: var(--brown); color: var(--paper); }
+    .footer__inner {
+      max-width: 1320px; margin: 0 auto;
+      padding: clamp(56px, 7vw, 88px) 28px 0;
+    }
+    .footer__grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px 24px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(244,234,214,.14);
+    }
+    .footer__brand { grid-column: span 2; min-width: 0; }
+    .footer__logo { font-family: var(--disp); font-size: 28px; line-height: .9; margin-bottom: 16px; }
+    .footer__logo span { color: var(--orange); }
+    .footer__tagline { font-size: 14.5px; line-height: 1.6; color: rgba(244,234,214,.66); max-width: 34ch; }
+    .footer__col-title {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--mustard); margin-bottom: 16px;
+    }
+    .footer__links { display: flex; flex-direction: column; gap: 11px; }
+    .footer__links a { color: rgba(244,234,214,.78); font-size: 14px; transition: color .2s; }
+    .footer__links a:hover { color: var(--orange); }
+    .footer__bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; flex-wrap: wrap; padding: 26px 0 40px;
+    }
+    .footer__copy { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: rgba(244,234,214,.5); }
+    .footer__payments { display: flex; gap: 8px; flex-wrap: wrap; }
+    .footer__pm {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+      color: rgba(244,234,214,.7); border: 1px solid rgba(244,234,214,.2);
+      padding: 5px 9px; border-radius: 6px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .header__nav { display: none; }
+      .col-grid-main { grid-template-columns: 1fr; }
+      .footer__brand { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="announcement">
+    <div class="announcement__track">
+      <div class="announcement__inner">
+        <span>Livraison offerte dès 100&nbsp;$</span><span class="dot">✦</span>
+        <span>Nouveaux arrivages chaque semaine</span><span class="dot">✦</span>
+        <span>Pièces authentiques des seventies</span><span class="dot">✦</span>
+        <span>Retours sous 30 jours</span><span class="dot">✦</span>
+      </div>
+      <div class="announcement__inner">
+        <span>Livraison offerte dès 100&nbsp;$</span><span class="dot">✦</span>
+        <span>Nouveaux arrivages chaque semaine</span><span class="dot">✦</span>
+        <span>Pièces authentiques des seventies</span><span class="dot">✦</span>
+        <span>Retours sous 30 jours</span><span class="dot">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__inner">
+      <nav class="header__nav">
+        <a href="#shop">Boutique</a>
+        <a href="#collections">Collections</a>
+        <a href="#histoire">Histoire</a>
+        <a href="#journal">Journal</a>
+      </nav>
+      <a href="#top" class="header__logo">THE 70<span>s</span> STUDIO</a>
+      <div class="header__actions">
+        <a href="#">Recherche</a>
+        <a href="#">Compte</a>
+        <a href="#" class="btn-cart">Panier <span class="btn-cart__badge">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__placeholder"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__glow"></div>
+    <div class="hero__vinyl">
+      <div class="hero__vinyl-label">
+        <div class="hero__vinyl-hole"></div>
+      </div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">✦&nbsp;&nbsp;Nouvelle collection · Automne 1973</p>
+      <h1 class="hero__title">Le grain des années groovy.</h1>
+      <p class="hero__subtitle">Posters, vinyles, lampes et trouvailles analogiques. Une sélection pointue pour recréer l'ambiance des seventies — chez vous, à travers un regard moderne.</p>
+      <div class="hero__ctas">
+        <a href="#shop" class="btn-primary">Magasiner la collection →</a>
+        <a href="#histoire" class="btn-outline">Notre histoire</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Faites défiler</span>
+      <span class="hero__scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="trust">
+    <div class="trust__inner">
+      <div class="trust__item">
+        <span class="trust__icon">✦</span>
+        <div><div class="trust__label">Livraison offerte</div><div class="trust__sub">Dès 100&nbsp;$ d'achat</div></div>
+      </div>
+      <div class="trust__item">
+        <span class="trust__icon">◐</span>
+        <div><div class="trust__label">Pièces authentiques</div><div class="trust__sub">Chinées et restaurées</div></div>
+      </div>
+      <div class="trust__item">
+        <span class="trust__icon">↺</span>
+        <div><div class="trust__label">Retours 30 jours</div><div class="trust__sub">Sans tracas</div></div>
+      </div>
+      <div class="trust__item">
+        <span class="trust__icon">◆</span>
+        <div><div class="trust__label">Paiement sécurisé</div><div class="trust__sub">Cryptage SSL</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section id="collections">
+    <div class="container collections">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">✦&nbsp;&nbsp;Tendances du moment</p>
+          <h2 class="section-title">Magasinez par univers</h2>
+        </div>
+        <a href="#shop" class="section-link">Tout magasiner →</a>
+      </div>
+      <div class="col-grid-main">
+        <a href="#shop" class="col-tile col-tile--wide">
+          <div class="col-tile__placeholder"><div class="placeholder-art">Walls of the 70s</div></div>
+          <div class="col-tile__overlay"></div>
+          <div class="col-tile__info">
+            <div class="col-tile__num">01 · Collection</div>
+            <div class="col-tile__name">Walls of the 70s</div>
+            <div class="col-tile__desc">Posters rock · jazz · cinéma · Van Gogh · Picasso · cadres dorés &amp; boisés</div>
+          </div>
+        </a>
+        <a href="#shop" class="col-tile col-tile--wide">
+          <div class="col-tile__placeholder"><div class="placeholder-art">Sound &amp; Soul</div></div>
+          <div class="col-tile__overlay"></div>
+          <div class="col-tile__info">
+            <div class="col-tile__num">02 · Collection</div>
+            <div class="col-tile__name">Sound &amp; Soul</div>
+            <div class="col-tile__desc">Tables tournantes · vinyles · casques &amp; AirPods · radios vintage</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-grid-sub">
+        <a href="#shop" class="col-tile col-tile--tall">
+          <div class="col-tile__placeholder"><div class="placeholder-art">The Living Room</div></div>
+          <div class="col-tile__overlay"></div>
+          <div class="col-tile__info col-tile__info--sm">
+            <div class="col-tile__num">03 · Collection</div>
+            <div class="col-tile__name col-tile__name--sm">The Living Room</div>
+            <div class="col-tile__desc col-tile__desc--sm">Tapis persans &amp; boho · lampes ambrées · coussins cuir · tables d'appoint</div>
+          </div>
+        </a>
+        <a href="#shop" class="col-tile col-tile--tall">
+          <div class="col-tile__placeholder"><div class="placeholder-art">Capture &amp; Mémoire</div></div>
+          <div class="col-tile__overlay"></div>
+          <div class="col-tile__info col-tile__info--sm">
+            <div class="col-tile__num">04 · Collection</div>
+            <div class="col-tile__name col-tile__name--sm">Capture &amp; Mémoire</div>
+            <div class="col-tile__desc col-tile__desc--sm">Caméras jetables · pellicules 35mm · cadres photo · albums vintage</div>
+          </div>
+        </a>
+        <a href="#shop" class="col-tile col-tile--tall">
+          <div class="col-tile__placeholder"><div class="placeholder-art">Art &amp; Culture</div></div>
+          <div class="col-tile__overlay"></div>
+          <div class="col-tile__info col-tile__info--sm">
+            <div class="col-tile__num">05 · Collection</div>
+            <div class="col-tile__name col-tile__name--sm">Art &amp; Culture</div>
+            <div class="col-tile__desc col-tile__desc--sm">Posters d'exposition · prints d'artistes · typographie murale · papeterie</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="shop" id="shop">
+    <div class="container shop__inner">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">✦&nbsp;&nbsp;Fraîchement chinés</p>
+          <h2 class="section-title">Derniers arrivages</h2>
+        </div>
+        <a href="#" class="section-link">Voir les nouveautés →</a>
+      </div>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <div class="product-card__img-placeholder">Affiche Cosmic Ride</div>
+            <span class="product-card__badge product-card__badge--new">Nouveau</span>
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__cat">Posters</div>
+            <div class="product-card__name">Affiche « Cosmic Ride »</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">38&nbsp;$</span>
+              <button class="btn-add">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <div class="product-card__img-placeholder">Funk Anthology Vol. 3</div>
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__cat">Vinyles</div>
+            <div class="product-card__name">Funk Anthology · Vol. 3</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">45&nbsp;$</span>
+              <button class="btn-add">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <div class="product-card__img-placeholder">Lampe Globe Ambre</div>
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__cat">Lampes</div>
+            <div class="product-card__name">Lampe Globe Ambre</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">120&nbsp;$</span>
+              <button class="btn-add">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <div class="product-card__img-placeholder">Caméra Sunset 35mm</div>
+            <span class="product-card__badge product-card__badge--pop">Populaire</span>
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__cat">Caméras</div>
+            <div class="product-card__name">Jetable « Sunset » 35mm</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">24&nbsp;$</span>
+              <button class="btn-add">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <div class="product-card__img-placeholder">Tourne-disque Walnut Mk2</div>
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__cat">Audio</div>
+            <div class="product-card__name">Tourne-disque Walnut Mk2</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">240&nbsp;$</span>
+              <button class="btn-add">+ Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <section class="story" id="histoire">
+    <div class="container story__inner">
+      <div class="story__visual">
+        <div class="story__img-wrap"></div>
+        <div class="story__vinyl"><div class="story__vinyl-label"></div></div>
+      </div>
+      <div class="story__content">
+        <p class="story__eyebrow">✦&nbsp;&nbsp;Notre histoire</p>
+        <h2 class="story__title">On ne vend pas des objets. On vend une ambiance.</h2>
+        <p class="story__text">The 70s Studio est né d'une obsession : retrouver la chaleur d'une époque où la musique se touchait, où la lumière était ambrée et où chaque objet avait une âme. Nous chinons, restaurons et sélectionnons chaque pièce comme un disque rare.</p>
+        <p class="story__text">Une boutique pensée comme un disquaire underground — réinventée en marque lifestyle premium. Le grain, le groove, le vécu : à travers un regard d'aujourd'hui.</p>
+        <div class="story__ctas">
+          <a href="#" class="btn-primary">Découvrir l'atelier →</a>
+          <span class="story__sig">— Étienne</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL -->
+  <section class="editorial">
+    <div class="editorial__overlay"></div>
+    <div class="editorial__content">
+      <p class="editorial__label">✦&nbsp;&nbsp;Le manifeste</p>
+      <p class="editorial__quote">« Vivre dans l'instant, mais avec une bande-son de 1973. »</p>
+    </div>
+  </section>
+
+  <!-- VINYL SPOTLIGHT -->
+  <section class="vinyl-section">
+    <div class="container vinyl-section__inner">
+      <div class="vinyl-display">
+        <div class="vinyl-disc">
+          <div class="vinyl-disc__label"><div class="vinyl-disc__hole"></div></div>
+          <div class="vinyl-disc__sheen"></div>
+        </div>
+        <p class="vinyl-hint">↻ Le disque tourne</p>
+      </div>
+      <div class="vinyl-info">
+        <p class="vinyl-info__eyebrow">✦&nbsp;&nbsp;Le disque du mois</p>
+        <h2 class="vinyl-info__title">Midnight Boogie</h2>
+        <p class="vinyl-info__sub">The Velvet Hours · Pressage 180g · 1974</p>
+        <p class="vinyl-info__desc">Une réédition rare, remastérisée à partir des bandes originales. Pochette gaufrée, vinyle ambré translucide. Tirage limité à 500 exemplaires numérotés.</p>
+        <div class="vinyl-info__footer">
+          <span class="vinyl-info__price">58&nbsp;$</span>
+          <button class="btn-primary">Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section id="journal">
+    <div class="container social">
+      <div class="social__header">
+        <p class="section-eyebrow" style="text-align:center">✦&nbsp;&nbsp;Restez connecté</p>
+        <h2 class="social__title">Suivez-nous @the70sstudio</h2>
+        <p class="social__sub">48,2k abonnés · #vibeseventies</p>
+      </div>
+      <div class="ig-grid">
+        <div class="ig-tile"><div class="ig-tile__placeholder">📷</div></div>
+        <div class="ig-tile"><div class="ig-tile__placeholder">📷</div></div>
+        <div class="ig-tile"><div class="ig-tile__placeholder">📷</div></div>
+        <div class="ig-tile"><div class="ig-tile__placeholder">📷</div></div>
+        <div class="ig-tile"><div class="ig-tile__placeholder">📷</div></div>
+        <div class="ig-tile"><div class="ig-tile__placeholder">📷</div></div>
+      </div>
+      <div class="reviews">
+        <div class="review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__text">« La lampe globe ambre a transformé mon salon. Emballage soigné, qualité irréprochable. On sent l'amour du détail. »</p>
+          <div class="review__author">Sophie L. · Montréal</div>
+        </div>
+        <div class="review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__text">« Mon tourne-disque Walnut est une pièce maîtresse. Le son, l'objet, l'expérience — tout respire les seventies. »</p>
+          <div class="review__author">Marc-André D. · Québec</div>
+        </div>
+        <div class="review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__text">« Enfin une boutique vintage qui se prend au sérieux sans tomber dans le kitsch. Une vraie direction artistique. »</p>
+          <div class="review__author">Camille R. · Laval</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="newsletter__inner">
+      <p class="newsletter__eyebrow">✦&nbsp;&nbsp;Le club du studio</p>
+      <h2 class="newsletter__title">Rejoignez le club.</h2>
+      <p class="newsletter__sub">Accès anticipé aux nouveaux arrivages, drops exclusifs et 10&nbsp;% sur votre première commande.</p>
+      <form class="newsletter__form" onsubmit="return false;">
+        <input type="email" placeholder="Votre adresse courriel" class="newsletter__input" />
+        <button type="submit" class="btn-dark">S'inscrire</button>
+      </form>
+      <p class="newsletter__legal">En vous inscrivant, vous acceptez nos conditions.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="footer__logo">THE 70<span>s</span> STUDIO</p>
+          <p class="footer__tagline">Disquaire underground réinventé en marque lifestyle. Posters, vinyles, lampes et trouvailles analogiques — chinés avec soin au Québec.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Boutique</p>
+          <div class="footer__links">
+            <a href="#">Vinyles</a>
+            <a href="#">Posters &amp; affiches</a>
+            <a href="#">Lampes &amp; déco</a>
+            <a href="#">Vêtements vintage</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer__col-title">Aide</p>
+          <div class="footer__links">
+            <a href="#">Livraison</a>
+            <a href="#">Retours</a>
+            <a href="#">FAQ</a>
+            <a href="#">Nous joindre</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer__col-title">Le studio</p>
+          <div class="footer__links">
+            <a href="#histoire">Notre histoire</a>
+            <a href="#journal">Journal</a>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 The 70s Studio · Fait avec ❤ au Québec</p>
+        <div class="footer__payments">
+          <span class="footer__pm">VISA</span>
+          <span class="footer__pm">MASTERCARD</span>
+          <span class="footer__pm">AMEX</span>
+          <span class="footer__pm">PAYPAL</span>
+          <span class="footer__pm">APPLE PAY</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
